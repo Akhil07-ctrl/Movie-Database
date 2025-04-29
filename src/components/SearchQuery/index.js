@@ -26,11 +26,14 @@ const SearchQuery = () => {
       return renderEmptyView()
     }
     return (
-      <ul className="row p-0 ms-0 me-0 mt-3">
-        {results.map(movie => (
-          <MovieCard key={movie.id} movieDetails={movie} />
-        ))}
-      </ul>
+      <div className="container-fluid p-0">
+        <h2 className="section-title mb-4">Search Results</h2>
+        <ul className="row g-3 p-0 movie-grid">
+          {results.map(movie => (
+            <MovieCard key={movie.id} movieDetails={movie} />
+          ))}
+        </ul>
+      </div>
     )
   }
 

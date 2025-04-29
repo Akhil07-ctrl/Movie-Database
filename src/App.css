@@ -1,5 +1,18 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #032541;
+  --secondary-color: #03b3e3;
+  --accent-color: #8fcea1;
+  --text-color: #333;
+  --light-text: #fff;
+  --background-color: #f8f9fa;
+  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -9,14 +22,91 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .App {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .route-page-body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 15px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+}
+
+.empty-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-view-container h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.empty-view-container p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .route-page-body {
+    padding: 20px;
+  }
+  
+  .empty-view-container h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .route-page-body {
+    padding: 25px;
+    max-width: 720px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .route-page-body {
+    padding: 30px;
+    max-width: 960px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .route-page-body {
+    max-width: 1140px;
+  }
+}
+
+/* Extra extra large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .route-page-body {
+    max-width: 1320px;
+  }
 }

@@ -5,6 +5,7 @@ import Popular from './components/Popular'
 import TopRated from './components/TopRated'
 import Upcoming from './components/Upcoming'
 import SearchQuery from './components/SearchQuery'
+import MovieDetails from './components/MovieDetails'
 
 import SearchMoviesContext from './context/SearchMoviesContext'
 
@@ -52,12 +53,16 @@ const App = () => {
       }}
     >
       <div className="App d-flex flex-column">
-        <Routes basename="/Movie-Database">
+        
+        <Routes>
           <Route path="/" element={<Popular />} />
           <Route path="/top-rated" element={<TopRated />} />
           <Route path="/upcoming" element={<Upcoming />} />
           <Route path="/search" element={<SearchQuery />} />
+          {/* Route for movie details */}
+          <Route path="/movie/:id" element={<MovieDetails />} />
         </Routes>
+        
       </div>
     </SearchMoviesContext.Provider>
   )

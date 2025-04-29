@@ -18,12 +18,12 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="navbar-container d-flex align-items-center p-3">
+    <nav className="navbar-container d-flex flex-column flex-md-row align-items-center">
       <div className="logo-container">
         <h1 className="page-logo">movieDB</h1>
       </div>
-      <div className="ms-auto d-flex align-items-center">
-        <ul className="order-1 d-flex align-items-center p-0 mb-0 ms-3 nav-items-list">
+      <div className="ms-md-auto d-flex flex-column flex-md-row align-items-center w-100 w-md-auto">
+        <ul className="nav-items-list">
           <li className="nav-item">
             <Link className="nav-link" to="/">
               Popular
@@ -40,7 +40,7 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        <div className="d-flex align-items-center">
+        <div className="search-container">
           <input
             type="text"
             className="me-2 search-input"
@@ -49,7 +49,7 @@ const NavBar = () => {
             placeholder="Search"
           />
           <button
-            className="btn btn-outline-info"
+            className="btn btn-outline-info btn-sm"
             type="button"
             onClick={onSearchHandler}
           >

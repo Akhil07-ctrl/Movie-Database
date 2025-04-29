@@ -21,12 +21,22 @@ const Pagination = ({ apiCallback, totalPages }) => {
   }
 
   return (
-    <div className="mb-3 d-flex justify-content-center align-items-center">
-      <button type="button" className="control-btn" onClick={onPrevPage}>
+    <div className="pagination-container">
+      <button 
+        type="button" 
+        className="control-btn" 
+        onClick={onPrevPage}
+        disabled={pageNo <= 1}
+      >
         Prev
       </button>
       <p className="page-no">{pageNo}</p>
-      <button type="button" className="control-btn" onClick={onNextPage}>
+      <button 
+        type="button" 
+        className="control-btn" 
+        onClick={onNextPage}
+        disabled={pageNo >= totalPages}
+      >
         Next
       </button>
     </div>
