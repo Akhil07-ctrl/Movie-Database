@@ -52,7 +52,7 @@ const App = () => {
       }}
     >
       <div className="App d-flex flex-column">
-        <Routes baseName="/Movie-Database">
+        <Routes basename="/Movie-Database">
           <Route path="/" element={<Popular />} />
           <Route path="/top-rated" element={<TopRated />} />
           <Route path="/upcoming" element={<Upcoming />} />
