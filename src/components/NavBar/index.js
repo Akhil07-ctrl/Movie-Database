@@ -22,7 +22,7 @@ const NavBar = () => {
       <div className="logo-container">
         <h1 className="page-logo">movieDB</h1>
       </div>
-      <div className="ms-md-auto d-flex flex-column flex-md-row align-items-center w-100 w-md-auto">
+      <div className="ms-md-auto d-flex flex-column flex-md-row align-items-center justify-content-between w-100 w-md-auto">
         <ul className="nav-items-list">
           <li className="nav-item">
             <Link className="nav-link" to="/">
@@ -40,22 +40,24 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        <div className="search-container">
+        <form className="search-container" onSubmit={(e) => {
+          e.preventDefault();
+          onSearchHandler(e);
+        }}>
           <input
             type="text"
-            className="me-2 search-input"
+            className="search-input"
             onChange={onChangeHandler}
             value={searchInput}
             placeholder="Search"
           />
           <button
-            className="btn btn-outline-info btn-sm"
-            type="button"
-            onClick={onSearchHandler}
+            className="btn btn-outline-info"
+            type="submit"
           >
             Search
           </button>
-        </div>
+        </form>
       </div>
     </nav>
   )

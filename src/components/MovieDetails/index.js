@@ -7,6 +7,7 @@ import './index.css'
 const MovieDetails = () => {
   const { id } = useParams()
   const [movieDetails, setMovieDetails] = useState(null)
+  const [castData, setCastData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -28,6 +29,23 @@ const MovieDetails = () => {
           runtime: data.runtime,
           genres: data.genres,
         })
+        
+        // Fetch cast data
+        const castUrl = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+        const castResponse = await fetch(castUrl)
+        const castData = await castResponse.json()
+        
+        // Get the top cast members (limit to 10)
+        const topCast = castData.cast.slice(0, 10).map(actor => ({
+          id: actor.id,
+          name: actor.name,
+          character: actor.character,
+          profilePath: actor.profile_path 
+            ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+            : 'https://via.placeholder.com/185x278?text=No+Image',
+        }))
+        
+        setCastData(topCast)
         setIsLoading(false)
       } catch (error) {
         console.error('Error fetching movie details:', error)
@@ -76,6 +94,29 @@ const MovieDetails = () => {
               <h3>Overview</h3>
               <p>{overview}</p>
             </div>
+            
+            {/* Cast Section */}
+            {castData && castData.length > 0 && (
+              <div className="movie-cast">
+                <h3>Cast</h3>
+                <div className="cast-list">
+                  {castData.map(actor => (
+                    <div key={actor.id} className="cast-item">
+                      <img 
+                        src={actor.profilePath} 
+                        alt={actor.name}
+                        className="cast-profile-img" 
+                      />
+                      <div className="cast-info">
+                        <p className="cast-name">{actor.name}</p>
+                        <p className="cast-character">{actor.character}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
             <Link to="/" className="back-button">
               <button className="btn btn-primary">Back to Home</button>
             </Link>
