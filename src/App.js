@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useCallback} from 'react'
 import {Route, Routes} from 'react-router-dom'
 
 import Popular from './components/Popular'
@@ -19,9 +19,9 @@ const App = () => {
   const [apiStatus, setApiStatus] = useState('INITIAL')
   const [searchInput, setSearchInput] = useState('')
 
-  const onChangeSearchInput = text => setSearchInput(text)
+  const onChangeSearchInput = useCallback(text => setSearchInput(text), [])
 
-  const getUpdatedData = responseData => ({
+  const getUpdatedData = useCallback(responseData => ({
     totalPages: responseData.total_pages,
     totalResults: responseData.total_results,
     results: responseData.results.map(eachMovie => ({
@@ -30,9 +30,9 @@ const App = () => {
       voteAverage: eachMovie.vote_average,
       title: eachMovie.title,
     })),
-  })
+  }), [])
 
-  const onTriggerSearchingQuery = async (page = 1) => {
+  const onTriggerSearchingQuery = useCallback(async (page = 1) => {
     setApiStatus('IN_PROGRESS')
     const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${searchInput}&page=${page}`
 
@@ -40,7 +40,7 @@ const App = () => {
     const data = await response.json()
     setSearchResponse(getUpdatedData(data))
     setApiStatus('SUCCESS')
-  }
+  }, [searchInput, getUpdatedData])
 
   return (
     <SearchMoviesContext.Provider

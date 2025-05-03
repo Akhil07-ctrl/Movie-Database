@@ -1,12 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './index.css'
 
 const Pagination = ({ apiCallback, totalPages }) => {
   const [pageNo, setPageNo] = useState(1)
+  const isInitialMount = useRef(true)
 
+  // Only call the API when the page number changes, not on initial render
   useEffect(() => {
+    // Skip the initial render to prevent duplicate API calls
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
+    
     apiCallback(pageNo)
-  }, [pageNo, apiCallback])
+  }, [pageNo, apiCallback]) // Include apiCallback to satisfy ESLint
 
   const onNextPage = () => {
     if (pageNo < totalPages) {

@@ -11,7 +11,7 @@ const TopRated = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [topRatedMovieResponse, setTopRatedMovieResponse] = useState({})
 
-  const getUpdatedData = responseData => ({
+  const getUpdatedData = useCallback(responseData => ({
     totalPages: responseData.total_pages,
     totalResults: responseData.total_results,
     results: responseData.results.map(eachMovie => ({
@@ -20,7 +20,7 @@ const TopRated = () => {
       voteAverage: eachMovie.vote_average,
       title: eachMovie.title,
     })),
-  })
+  }), [])
 
   const getTopRatedMoviesResponse = useCallback(async (page = 1) => {
     setIsLoading(true)
@@ -31,7 +31,7 @@ const TopRated = () => {
     const newData = getUpdatedData(data)
     setTopRatedMovieResponse(newData)
     setIsLoading(false)
-  }, [])
+  }, [getUpdatedData])
 
   useEffect(() => {
     getTopRatedMoviesResponse()

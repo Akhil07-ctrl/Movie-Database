@@ -15,7 +15,7 @@ const SearchQuery = () => {
   const renderEmptyView = () => (
     <div className="empty-view-container">
       <h1>No results found.</h1>
-      <p>Don not get worried, Try to search again.</p>
+      <p>Do not get worried, Try to search again.</p>
     </div>
   )
 
@@ -60,10 +60,13 @@ const SearchQuery = () => {
       <div className="route-page-body">
         {renderSearchResultViews()}
       </div>
-      <Pagination
-        totalPages={searchResponse.totalPages}
-        apiCallback={onTriggerSearchingQuery}
-      />
+      {/* Only render Pagination when we have search results and totalPages exists */}
+      {apiStatus === 'SUCCESS' && searchResponse.totalPages > 0 && (
+        <Pagination
+          totalPages={searchResponse.totalPages}
+          apiCallback={onTriggerSearchingQuery}
+        />
+      )}
     </>
   )
 }

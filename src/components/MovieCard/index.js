@@ -18,17 +18,19 @@ const MovieCard = props => {
 
   return (
     <li className={`movie-card-container ${getColumnClass()} mb-3 d-flex flex-column`}>
-      <div className="card-inner">
+      <div className="card-inner d-flex flex-column h-100">
         <img className="movie-card-image" alt={title} src={posterPath} />
         <div className="d-flex flex-column align-items-center mt-2">
           <h1 className="movie-title">{title}</h1>
           <p className="movie-rating">Rating: {voteAverage}</p>
         </div>
-        <Link to={`/movie/${id}`} className="mt-auto align-self-center">
-          <button className="btn btn-outline-success btn-sm mt-2" type="button">
-            View Details
-          </button>
-        </Link>
+        <div className="d-flex justify-content-center mt-auto">
+          <Link to={`/movie/${id}`}>
+            <button className="btn btn-outline-success btn-sm mt-2" type="button">
+              View Details
+            </button>
+          </Link>
+        </div>
       </div>
     </li>
   )

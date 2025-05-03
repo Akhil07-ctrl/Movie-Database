@@ -7,6 +7,12 @@
   height: 100%;
 }
 
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .movie-card-container:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
